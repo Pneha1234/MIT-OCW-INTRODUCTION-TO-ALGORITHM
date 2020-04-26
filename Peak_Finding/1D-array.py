@@ -5,11 +5,11 @@
 #  if b[n/2]<b[n/2 -1] then only look at left half 1..n/2
 #  elif b[n/2]< b[n/2+1] then only look at right half n/2 +1
 # else n/2 is the peak
+# time complexity 0(logn)
 
 # solution
+
 def find_a_peak(array):
-    # size = int(input('Enter size of array: '))
-    # array = [int(input('Enter a value: ')) for _ in range(size)]
     if len(array) == 0:
         return None
 
@@ -17,18 +17,29 @@ def find_a_peak(array):
         return array[1]
 
     half = len(array) // 2
+    
 
     if array[half - 1] < array[half] and array[half] > array[half + 1]:
         return array[half]
+    
 
     if array[half - 1] >= array[half]:
         peak = find_a_peak(array[0:half])
         if peak:
             return peak
+            
 
     if half >= 1 and array[half + 1] >= array[half]:
         peak = find_a_peak(array[half:len(array)])
         if peak:
             return peak
 
+def find_peak(array):
+    return find_a_peak(array)
+
+
+size = int(input('Enter size of array: '))
+array = [int(input(F'Enter {i}th value: ')) for i in range(size)]
+    
+print("Index of a peak point is", find_peak(array))
 
